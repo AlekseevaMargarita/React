@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from './Button'
 import Input from './Input'
+import './Form.scss'
 
 function Form({ onSubmit }) {
     const [value, setValue] = useState('');
@@ -17,7 +18,9 @@ function Form({ onSubmit }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            className="Form"
+            onSubmit={handleSubmit}>
             <Input
                 value={value}
                 onChange={handleChange}

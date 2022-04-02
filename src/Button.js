@@ -1,7 +1,8 @@
+import './Button.scss'
 
 function Button() {
     return (
-        <button>
+        <button className="Button">
             Отправить сообщение
         </button>
     )
