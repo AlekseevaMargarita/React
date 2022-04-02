@@ -1,11 +1,26 @@
+import { useState } from 'react';
+import Button from './Button'
+import Input from './Input'
 
+function Form({ onSubmit }) {
+    const [value, setValue] = useState('');
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setValue('');
+        onSubmit(value);
+    }
 
-function Form(props) {
     return (
-        <div>
-            <input type="text" value={props.value} placeholder="Введите сообщение" />
-
-        </div>
+        <form onSubmit={handleSubmit}>
+            <Input
+                value={value}
+                onChange={handleChange}
+            />
+            <Button />
+        </form>
     )
 }
 

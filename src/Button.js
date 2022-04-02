@@ -1,9 +1,9 @@
 
-function Button(props) {
+function Button() {
     return (
-        <div onClick={props.onClick}>
+        <button>
             Отправить сообщение
-        </div>
+        </button>
     )
 }
 
