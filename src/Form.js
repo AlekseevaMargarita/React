@@ -9,6 +9,9 @@ function Form({ onSubmit }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (value === '') {
+            return;
+        }
         setValue('');
         onSubmit(value);
     }
