@@ -1,8 +1,25 @@
 .Message {
-    width: 400px;
+    width: 100%;
     text-align: left;
     border: 1px solid black;
     border-radius: 10px;
     padding: 5px;
-    background-color: azure;
+    margin-bottom: 5px;
+
+    &-green {
+        background-color: aquamarine;
+    }
+
+    &-blue {
+        background-color: azure;
+    }
+
+    &__author {
+        font-size: small;
+        font-weight: bold;
+    }
+
+    &__text {
+        word-wrap: break-word;
+    }
 }

@@ -1,22 +1,42 @@
 
+import React from 'react';
 import './App.scss';
+import { useEffect, useState } from 'react';
+import Form from './Form';
 import Message from './Message'
-import img from './2022-03-27_173907.png'
-
-const text = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-Tempore ab fugiat aperiam facere nam dolorem enim, minima minus, culpa deserunt animi. 
-Unde atque excepturi perspiciatis, nisi explicabo nostrum nesciunt consequuntur!`;
+import { AUTHORS } from './constants';
 
 function App() {
+  const [messageList, setMessageList] = useState([]);
+
+  const updateMessageList = (text, author = AUTHORS.NONAME) => {
+    const newMessage = { text, author };
+    setMessageList((prevMessageList) => [...prevMessageList, newMessage])
+  };
+
+  useEffect(() => {
+    let timerId;
+    if (
+      messageList.length !== 0 &&
+      messageList[messageList.length - 1].author !== AUTHORS.BOT
+    ) {
+      timerId = setTimeout(() => {
+        updateMessageList('Ваше сообщение прочитано', AUTHORS.BOT);
+      }, 1500);
+    }
+
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
+  }, [messageList]);
+
   return (
     <div className="App">
-      <h1>Урок 1</h1>
-      <h2>Задания 1-4</h2>
-      <Message style={{ backgroundColor: '#f0ffff' }} text={text} />
-      <h2>Задание 5</h2>
-      <img src={img} alt="Задание 5" className="img"></img>
+      <Message items={messageList} />
+      <Form onSubmit={updateMessageList} />
     </div>
-
   );
 }
 
