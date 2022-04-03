@@ -20,14 +20,14 @@ function App() {
       messageList.length !== 0 &&
       messageList[messageList.length - 1].author !== AUTHORS.BOT
     ) {
-      timerId = setInterval(() => {
+      timerId = setTimeout(() => {
         updateMessageList('Ваше сообщение прочитано', AUTHORS.BOT);
       }, 1500);
     }
 
     return () => {
       if (timerId) {
-        clearInterval(timerId);
+        clearTimeout(timerId);
       }
     };
   }, [messageList]);
