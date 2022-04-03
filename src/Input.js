@@ -1,4 +1,7 @@
-import './Input.scss'
+import React from 'react';
+import './Input.scss';
+import PropTypes from 'prop-types';
+
 
 function Input(props) {
 
@@ -14,3 +17,8 @@ function Input(props) {
 }
 
 export default Input;
+
+Input.propTypes = {
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+}

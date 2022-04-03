@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import Button from './Button'
-import Input from './Input'
-import './Form.scss'
+import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
+import './Form.scss';
+import PropTypes from 'prop-types';
 
 function Form({ onSubmit }) {
     const [value, setValue] = useState('');
@@ -32,3 +33,7 @@ function Form({ onSubmit }) {
 
 
 export default Form;
+
+Form.propTypes = {
+    onSubmit: PropTypes.func,
+};

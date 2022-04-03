@@ -1,4 +1,5 @@
 import './Button.scss'
+import React from 'react';
 
 function Button() {
     return (
