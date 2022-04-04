@@ -1,12 +1,19 @@
-import './Button.scss'
 import React from 'react';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import './Button.scss'
 
-function Button() {
+function Btn() {
     return (
-        <button className="Button">
-            Отправить сообщение
-        </button>
+        <Button
+            type="submit"
+            variant="contained"
+            endIcon={<SendIcon />}
+            sx="padding: 15px 15px; margin-top:"
+        >
+            Отправить
+        </Button>
     )
 }
 
-export default Button;
+export default Btn;

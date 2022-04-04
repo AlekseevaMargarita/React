@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Input.scss';
 import PropTypes from 'prop-types';
+import TextField from '@mui/material/TextField';
 
 
 function Input(props) {
 
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    })
+
     return (
-        <input
-            type="text"
-            className="Input"
+        <TextField
+            id="outlined-basic"
+            label="Введите сообщение"
+            variant="outlined"
             value={props.value}
             onChange={props.onChange}
-            placeholder="Введите сообщение"
+            /* autoFocus="true" */
+            inputRef={inputRef}
         />
     )
 }
+
 
 export default Input;
 
