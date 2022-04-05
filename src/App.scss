@@ -1,4 +1,19 @@
 .App {
     padding: 20px;
-    width: 500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chats {
+    width: 40%;
+}
+
+.messages {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
 }

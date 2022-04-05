@@ -1,10 +1,15 @@
 
-import React from 'react';
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+import { ThemeProvider } from '@mui/material/styles';
 import './App.scss';
-import { useEffect, useState } from 'react';
 import Form from './Form';
-import Message from './Message'
+import Message from './Message';
 import { AUTHORS } from './constants';
+import ChatsList from './ChatsList';
+import Theme from './Theme';
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -33,10 +38,17 @@ function App() {
   }, [messageList]);
 
   return (
-    <div className="App">
-      <Message items={messageList} />
-      <Form onSubmit={updateMessageList} />
-    </div>
+    <ThemeProvider theme={Theme}>
+      <div className="App">
+        <div className="chats">
+          <ChatsList />
+        </div>
+        <div className="messages">
+          <Message items={messageList} />
+          <Form onSubmit={updateMessageList} />
+        </div>
+      </div>
+    </ThemeProvider>
   );
 }
 
