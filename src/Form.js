@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import Btn from './Button';
 import Input from './Input';
 import './Form.scss';
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ function Form({ onSubmit }) {
                 value={value}
                 onChange={handleChange}
             />
-            <Button />
+            <Btn />
         </form>
     )
 }
