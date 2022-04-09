@@ -10,6 +10,7 @@ import Message from './Message';
 import { AUTHORS } from './constants';
 import ChatsList from './ChatsList';
 import Theme from './Theme';
+import Router from './pages/Router';
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -40,6 +41,9 @@ function App() {
   return (
     <ThemeProvider theme={Theme}>
       <div className="App">
+        <header className='header'>
+          <Router />
+        </header>
         <div className="chats">
           <ChatsList />
         </div>
