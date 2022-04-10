@@ -15,6 +15,9 @@ const Theme = createTheme({
             contrastText: '#000',
         },
     },
+    button: {
+        padding: "15px 15px",
+    }
 });
 
 export default Theme;
