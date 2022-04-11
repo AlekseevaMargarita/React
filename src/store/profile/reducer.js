@@ -1,0 +1,23 @@
+import { SET_NAME, TOGGLE_NAME } from "./action";
+
+const initialState = {
+    showName: true,
+    name: 'Default',
+};
+
+export const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case TOGGLE_NAME:
+            return {
+                ...state,
+                showName: !state.showName,
+            };
+        case SET_NAME:
+            return {
+                ...state,
+                name: action.name,
+            }
+        default:
+            return state;
+    }
+};

@@ -4,6 +4,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import './App.scss';
 import Theme from './Theme';
 import Router from './pages/Router';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
 
@@ -28,7 +30,9 @@ function App() {
   return (
     <ThemeProvider theme={Theme}>
       <div className="App">
-        <Router />
+        <Provider store={store}>
+          <Router />
+        </Provider>
       </div>
     </ThemeProvider>
   );
