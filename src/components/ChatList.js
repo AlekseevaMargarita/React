@@ -6,12 +6,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import PropTypes from 'prop-types';
 import '../App.scss';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { shallowEqual, useSelector } from "react-redux";
+import FormDialog from "./FormDialog";
 
-const ChatList = ({ chats }) => {
+const ChatList = () => {
+    const chats = useSelector(state => state.chats, shallowEqual);
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -27,14 +29,14 @@ const ChatList = ({ chats }) => {
             <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 <List component="nav" aria-label="chatList">
                     {Object.keys(chats).map((chat, index) => (
-                        <Link to={`/chats/${chat}`} key={index}>
+                        <Link to={`/chats/${chats[chat].chatId}`} key={index}>
                             <ListItemButton
                                 selected={selectedIndex === index}
                                 onClick={(event) => handleListItemClick(event, index)}>
                                 <ListItemAvatar>
                                     <Avatar />
                                 </ListItemAvatar>
-                                <ListItemText primary={chats[chat].name} />
+                                <ListItemText primary={chats[chat].chatName} />
                                 <IconButton edge="end" aria-label="delete">
                                     <DeleteIcon />
                                 </IconButton>
@@ -43,12 +45,9 @@ const ChatList = ({ chats }) => {
                     ))}
                 </List>
             </Box>
+            <FormDialog />
         </div>
     )
 };
 
 export default ChatList;
-
-ChatList.propTypes = {
-    chats: PropTypes.object,
-}

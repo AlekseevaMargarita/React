@@ -1,30 +1,25 @@
 import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import MessageList from './MessageList';
 import ControlPanel from './ControlPanel';
+import { shallowEqual, useSelector } from 'react-redux';
 
-const Messages = ({ chats, addMessage }) => {
+const Messages = () => {
 
     const { chatId } = useParams();
+    const chats = useSelector(state => state.chats, shallowEqual);
+    const find = chats.findIndex(item => item.chatId == chatId);
 
-    if (!chats[chatId]) {
+    if (find < 0) {
         return (<Navigate to="/chats" replace />)
     }
 
-    const messages = chats[chatId].messages;
-
     return (
         <div className="wrap__messages">
-            <MessageList messages={messages} />
-            <ControlPanel addMessage={addMessage} />
+            <MessageList />
+            <ControlPanel />
         </div>
     )
 };
 
 export default Messages;
-
-Messages.propTypes = {
-    chats: PropTypes.object,
-    addMessage: PropTypes.func,
-}
