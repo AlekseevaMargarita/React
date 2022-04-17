@@ -9,13 +9,14 @@ import Avatar from '@mui/material/Avatar';
 import '../App.scss';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import FormDialog from "./FormDialog";
 import { selectChats } from "../store/chats/selectors";
+import { deleteChat } from "../store/chats/action";
 
 const ChatList = () => {
     const chats = useSelector(selectChats, shallowEqual);
-
+    const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     const handleListItemClick = (
@@ -23,6 +24,12 @@ const ChatList = () => {
         index: number,
     ) => {
         setSelectedIndex(index);
+    };
+
+    const onDeleteChat = (event, chatId) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(deleteChat(chatId));
     };
 
     return (
@@ -38,7 +45,7 @@ const ChatList = () => {
                                     <Avatar />
                                 </ListItemAvatar>
                                 <ListItemText primary={chats[chat].chatName} />
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
                                     <DeleteIcon />
                                 </IconButton>
                             </ListItemButton>
