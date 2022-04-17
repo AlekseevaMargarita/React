@@ -6,13 +6,17 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import PropTypes from 'prop-types';
 import '../App.scss';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import FormDialog from "./FormDialog";
+import { selectChats } from "../store/chats/selectors";
+import { deleteChat } from "../store/chats/action";
 
-const ChatList = ({ chats }) => {
-
+const ChatList = () => {
+    const chats = useSelector(selectChats, shallowEqual);
+    const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     const handleListItemClick = (
@@ -22,20 +26,26 @@ const ChatList = ({ chats }) => {
         setSelectedIndex(index);
     };
 
+    const onDeleteChat = (event, chatId) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(deleteChat(chatId));
+    };
+
     return (
         <div className="chats">
             <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 <List component="nav" aria-label="chatList">
                     {Object.keys(chats).map((chat, index) => (
-                        <Link to={`/chats/${chat}`} key={index}>
+                        <Link to={`/chats/${chats[chat].chatId}`} key={index}>
                             <ListItemButton
                                 selected={selectedIndex === index}
                                 onClick={(event) => handleListItemClick(event, index)}>
                                 <ListItemAvatar>
                                     <Avatar />
                                 </ListItemAvatar>
-                                <ListItemText primary={chats[chat].name} />
-                                <IconButton edge="end" aria-label="delete">
+                                <ListItemText primary={chats[chat].chatName} />
+                                <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
                                     <DeleteIcon />
                                 </IconButton>
                             </ListItemButton>
@@ -43,12 +53,9 @@ const ChatList = ({ chats }) => {
                     ))}
                 </List>
             </Box>
+            <FormDialog />
         </div>
     )
 };
 
 export default ChatList;
-
-ChatList.propTypes = {
-    chats: PropTypes.object,
-}

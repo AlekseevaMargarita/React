@@ -2,7 +2,7 @@ import { SET_NAME, TOGGLE_NAME } from "./action";
 
 const initialState = {
     showName: true,
-    name: 'Default',
+    name: 'NoName',
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -15,8 +15,8 @@ export const profileReducer = (state = initialState, action) => {
         case SET_NAME:
             return {
                 ...state,
-                name: action.name,
-            }
+                name: action.payload.name,
+            };
         default:
             return state;
     }

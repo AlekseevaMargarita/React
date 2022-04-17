@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Btn from '../components/Btn';
 import { setName, toggleName } from '../store/profile/action';
+import { selectShowName, selectUserName } from '../store/profile/selectors';
 
 const Profile = () => {
-    const { showName, name } = useSelector((state) => state);
+    const showName = useSelector(selectShowName, shallowEqual);
+    const name = useSelector(selectUserName, shallowEqual);
 
     const dispatch = useDispatch();
 
