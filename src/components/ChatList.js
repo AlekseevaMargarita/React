@@ -11,9 +11,10 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { shallowEqual, useSelector } from "react-redux";
 import FormDialog from "./FormDialog";
+import { selectChats } from "../store/chats/selectors";
 
 const ChatList = () => {
-    const chats = useSelector(state => state.chats, shallowEqual);
+    const chats = useSelector(selectChats, shallowEqual);
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 

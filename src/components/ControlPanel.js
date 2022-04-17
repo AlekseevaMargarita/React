@@ -1,17 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AUTHORS } from "../constants/constants";
 import TextField from '@mui/material/TextField';
 import '../App.scss';
 import Btn from './Btn';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addMessage } from '../store/messages/action';
+import { selectMessagesByChatId } from '../store/messages/selectors';
 
 const ControlPanel = () => {
 
     const [value, setValue] = useState('');
     let { chatId } = useParams();
-    const messages = useSelector(state => state.messages[chatId], shallowEqual);
+    const getMessagesByChatId = useMemo(
+        () => selectMessagesByChatId(chatId), [chatId]
+    );
+    const messages = useSelector(getMessagesByChatId);
     const inputRef = useRef(null);
     const dispatch = useDispatch();
 
