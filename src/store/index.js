@@ -1,4 +1,5 @@
 
+
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
@@ -24,11 +25,11 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(thunk)),
+    applyMiddleware(sagaMiddleware),
 );
 
 export const persistor = persistStore(store);

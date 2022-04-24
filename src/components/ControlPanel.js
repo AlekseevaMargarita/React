@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import '../App.scss';
 import Btn from './Btn';
 import { useDispatch } from 'react-redux';
-import { addMessageWithThunk } from '../store/messages/action';
+import { addMessageWithSaga } from '../store/messages/action';
 
 const ControlPanel = () => {
 
@@ -23,7 +23,7 @@ const ControlPanel = () => {
         const messageId = `id${Date.now()}`;
         if (value !== '') {
             const newMessage = { messageId, text: value, author: AUTHORS.NONAME };
-            dispatch(addMessageWithThunk(chatId, newMessage));
+            dispatch(addMessageWithSaga(chatId, newMessage));
             setValue('');
             inputRef.current?.focus();
         }
