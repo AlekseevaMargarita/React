@@ -30,8 +30,8 @@ const ControlPanel = () => {
     };
 
     useEffect(() => {
-        inputRef.current?.focus;
-    }, []);
+        inputRef.current?.focus();
+    }, [chatId]);
 
     return (
         <form
