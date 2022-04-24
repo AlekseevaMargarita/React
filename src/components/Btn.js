@@ -14,8 +14,7 @@ const Btn = ({ buttonLabel }) => {
             endIcon={<SendIcon />}
             style={{
                 padding: theme.button.padding
-            }}
-        >
+            }}>
             {buttonLabel}
         </Button>
     );
@@ -25,5 +24,4 @@ export default Btn;
 
 Btn.propTypes = {
     buttonLabel: PropTypes.string,
-    onclick: PropTypes.func,
 }

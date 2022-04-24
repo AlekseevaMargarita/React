@@ -34,27 +34,25 @@ const ChatList = () => {
 
     return (
         <div className="chats">
-            <div className="chats-wrap">
-                <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    <List component="nav" aria-label="chatList">
-                        {Object.keys(chats).map((chat, index) => (
-                            <Link to={`/chats/${chats[chat].chatId}`} key={index}>
-                                <ListItemButton
-                                    selected={selectedIndex === index}
-                                    onClick={(event) => handleListItemClick(event, index)}>
-                                    <ListItemAvatar>
-                                        <Avatar />
-                                    </ListItemAvatar>
-                                    <ListItemText primary={chats[chat].chatName} />
-                                    <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </ListItemButton>
-                            </Link>
-                        ))}
-                    </List>
-                </Box>
-            </div>
+            <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                <List component="nav" aria-label="chatList">
+                    {Object.keys(chats).map((chat, index) => (
+                        <Link to={`/chats/${chats[chat].chatId}`} key={index}>
+                            <ListItemButton
+                                selected={selectedIndex === index}
+                                onClick={(event) => handleListItemClick(event, index)}>
+                                <ListItemAvatar>
+                                    <Avatar />
+                                </ListItemAvatar>
+                                <ListItemText primary={chats[chat].chatName} />
+                                <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </ListItemButton>
+                        </Link>
+                    ))}
+                </List>
+            </Box>
             <FormDialog />
         </div>
     )
