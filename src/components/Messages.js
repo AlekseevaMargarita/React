@@ -8,7 +8,7 @@ import { selectChats } from '../store/chats/selectors';
 const Messages = () => {
 
     const { chatId } = useParams();
-    const chats = useSelector(selectChats, shallowEqual);
+    const { chats } = useSelector(selectChats, shallowEqual);
     const find = chats.findIndex(item => item.chatId == chatId);
 
     if (find < 0) {

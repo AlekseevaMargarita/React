@@ -4,8 +4,8 @@ import { AUTHORS } from "../constants/constants";
 import TextField from '@mui/material/TextField';
 import '../App.scss';
 import Btn from './Btn';
+import { addMessageWithFB } from '../middlewares/middleware';
 import { useDispatch } from 'react-redux';
-import { addMessageWithThunk } from '../store/messages/action';
 
 const ControlPanel = () => {
 
@@ -20,10 +20,9 @@ const ControlPanel = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        const messageId = `id${Date.now()}`;
         if (value !== '') {
-            const newMessage = { messageId, text: value, author: AUTHORS.NONAME };
-            dispatch(addMessageWithThunk(chatId, newMessage));
+            const newMessage = { text: value, author: AUTHORS.NONAME };
+            dispatch(addMessageWithFB(chatId, newMessage));
             setValue('');
             inputRef.current?.focus();
         }

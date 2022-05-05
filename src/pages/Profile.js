@@ -1,23 +1,26 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Btn from '../components/Btn';
-import { setName, toggleName } from '../store/profile/action';
+import { initUserData, setNameInDB, setShowNameInDB } from '../store/profile/action';
 import { selectShowName, selectUserName } from '../store/profile/selectors';
+
 
 const Profile = () => {
     const showName = useSelector(selectShowName, shallowEqual);
     const name = useSelector(selectUserName, shallowEqual);
 
-    const dispatch = useDispatch();
-
-    const setShowName = useCallback(() => {
-        dispatch(toggleName);
-    }, [dispatch]);
-
     const [value, setValue] = useState('');
 
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        initUserData();
+    }, []);
+
+    const setShowName = (e) => {
+        setShowNameInDB(e.target.checked);
+    };
 
     const handleInput = (e) => {
         setValue(e.target.value);
@@ -26,7 +29,7 @@ const Profile = () => {
     const handleClick = (e) => {
         e.preventDefault();
         if (value !== '') {
-            dispatch(setName(value));
+            setNameInDB(value);
             setValue('');
             inputRef.current?.focus();
         }

@@ -42,6 +42,18 @@ h1 {
     text-align: center;
 }
 
+.home {
+    &__link-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
+
+    &__wrap {
+        display: flex;
+    }
+}
+
 .Message {
     max-width: 500px;
     min-width: 200px;

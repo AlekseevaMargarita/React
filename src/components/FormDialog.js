@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch } from 'react-redux';
-import { addChat } from '../store/chats/action';
+import { addChatWithFB } from '../middlewares/middleware';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -27,12 +27,7 @@ export default function FormDialog() {
   };
 
   const onAddChat = (chatName) => {
-    const chatId = `chat${Date.now()}`;
-    const chat = {
-      chatId,
-      chatName,
-    }
-    dispatch(addChat(chat));
+    dispatch(addChatWithFB(chatName));
   }
 
   const handleClick = (e) => {
