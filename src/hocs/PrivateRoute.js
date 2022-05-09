@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from "react-router-dom"
-import useAuth from "../hooks/AuthProvider";
-
+import useAuth from '../hooks/AuthProvider';
 
 const PrivateRoute = () => {
     const location = useLocation();

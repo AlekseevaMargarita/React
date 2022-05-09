@@ -1,8 +1,9 @@
 
 import { onValue, push, ref, remove, set } from "firebase/database";
-import { db } from "../services/firebase";
+import { auth, db } from "../services/firebase";
 import { updateChats } from "../store/chats/action";
 import { updateMessages } from "../store/messages/action";
+import { setName, toggleName } from "../store/profile/action";
 
 export const initTrackerWithFB = () => async (dispatch) => {
     const chatRef = ref(db, 'chats');
@@ -50,3 +51,38 @@ export const addMessageWithFB = (chatId, newMessage) => async () => {
     push(getMessagesRefByChatId(chatId), newMessage);
 };
 
+
+export const initUserData = () => async (dispatch) => {
+    const uid = auth.currentUser.uid;
+    const userEmail = auth.currentUser.email;
+    const userNameRef = ref(db, `profile/${uid}/name`);
+    const userShowNameRef = ref(db, `profile/${uid}/showName`);
+
+    onValue(userNameRef, (snapshot) => {
+        let userName = snapshot.val();
+        if (userName === null) {
+            userName = userEmail;
+            dispatch(setNameInDB(userName));
+        }
+        dispatch(setName(uid, userName));
+    });
+    onValue(userShowNameRef, (snapshot) => {
+        let userShowName = snapshot.val();
+        if (userShowName === null) {
+            dispatch(setShowNameInDB(true));
+        }
+        dispatch(toggleName(uid, userShowName));
+    });
+};
+
+export const setNameInDB = (newName) => async () => {
+    const uid = auth.currentUser.uid;
+    const userNameRef = ref(db, `profile/${uid}/name`);
+    set(userNameRef, newName);
+};
+
+export const setShowNameInDB = (newValue) => async () => {
+    const uid = auth.currentUser.uid;
+    const userShowNameRef = ref(db, `profile/${uid}/showName`);
+    set(userShowNameRef, newValue);
+};

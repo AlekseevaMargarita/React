@@ -10,7 +10,7 @@ export const profileReducer = (state = initialState, action) => {
         case TOGGLE_NAME:
             return {
                 ...state,
-                showName: action.payload.showName,
+                showName: action.payload.value,
             };
         case SET_NAME:
             return {

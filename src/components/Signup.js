@@ -5,8 +5,10 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import Btn from './Btn';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    let navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -24,10 +26,10 @@ const Signup = () => {
         setError('');
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-
+            setTimeout(() => navigate('/signin', { replace: true }), 2000);
             setEmail('');
             setPassword('');
-            toast.success('Вы зарегистрированы', {
+            toast.success('Вы зарегистрированы и будете перенаправлены на страницу авторизации', {
                 position: toast.POSITION.TOP_RIGHT
             });
         } catch (error) {
@@ -41,7 +43,7 @@ const Signup = () => {
 
     return (
         <div>
-            <h2>Регистрация</h2>
+            <h1>Регистрация</h1>
             <ToastContainer />
             <form onSubmit={onSubmit}>
                 <TextField
@@ -63,6 +65,8 @@ const Signup = () => {
                 {error && <p>{error}</p>}
                 <Btn buttonLabel='Зарегистрироваться'></Btn>
             </form>
+            <br />
+            <Link to={"/signin"}>Войти</Link>
         </div>
     )
 };

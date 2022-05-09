@@ -1,25 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Btn from '../components/Btn';
-import { initUserData, setNameInDB, setShowNameInDB } from '../store/profile/action';
 import { selectShowName, selectUserName } from '../store/profile/selectors';
-
+import { Button } from '@mui/material';
+import useAuth from '../hooks/AuthProvider';
+import { initUserData, setNameInDB, setShowNameInDB } from '../middlewares/middleware';
 
 const Profile = () => {
     const showName = useSelector(selectShowName, shallowEqual);
     const name = useSelector(selectUserName, shallowEqual);
+    const auth = useAuth();
+    const dispatch = useDispatch();
 
     const [value, setValue] = useState('');
-
     const inputRef = useRef(null);
 
     useEffect(() => {
-        initUserData();
+        dispatch(initUserData());
     }, []);
 
     const setShowName = (e) => {
-        setShowNameInDB(e.target.checked);
+        dispatch(setShowNameInDB(e.target.checked));
     };
 
     const handleInput = (e) => {
@@ -29,11 +31,16 @@ const Profile = () => {
     const handleClick = (e) => {
         e.preventDefault();
         if (value !== '') {
-            setNameInDB(value);
+            dispatch(setNameInDB(value));
             setValue('');
             inputRef.current?.focus();
         }
     };
+
+    const logOut = (e) => {
+        e.preventDefault();
+        auth.signout();
+    }
 
     useEffect(() => {
         inputRef.current?.focus;
@@ -71,6 +78,10 @@ const Profile = () => {
                     <Btn buttonLabel="Отправить" />
                 </div>
             </form>
+            <br />
+            <div>
+                <Button type="submit" onClick={logOut}>Выход</Button>
+            </div>
         </>
     );
 };

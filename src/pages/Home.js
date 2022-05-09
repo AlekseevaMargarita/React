@@ -6,13 +6,12 @@ const Home = () => {
     return (
         <>
             <h1>Home</h1>
-            <div className='home__wrap'>
-                <div className='home__link-wrap'>
-                    <Link to={"/signin"}>Вход</Link>
-                    <Link to={"/signup"}>Регистрация</Link>
-                </div>
-                <Outlet />
+            <div>
+                <span>Для общения в чатах необходимо  </span>
+                <Link to={"/signin"}>авторизоваться</Link>
             </div>
+            <Outlet />
+
         </>
     )
 };

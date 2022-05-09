@@ -1,4 +1,4 @@
-import { AUTHORS } from "../../constants/constants";
+/* import { AUTHORS } from "../../constants/constants"; */
 
 export const ADD_MESSAGE = 'MESSAGES::ADD_MESSAGE';
 export const UPDATE_MESSAGES = 'MESSAGES::UPDATE_MESSAGES';
@@ -11,7 +11,7 @@ export const addMessage = (chatId, message) => ({
     },
 });
 
-let timerId;
+/* let timerId;
 
 export const addMessageWithThunk = (chatId, message) => (dispatch) => {
     dispatch(addMessage(chatId, message));
@@ -34,7 +34,7 @@ export const addMessageWithThunk = (chatId, message) => (dispatch) => {
             )
         }, 1500);
     }
-};
+}; */
 
 export const updateMessages = (messages) => ({
     type: UPDATE_MESSAGES,

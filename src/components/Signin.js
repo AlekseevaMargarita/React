@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState } from 'react';
 import Btn from './Btn';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/AuthProvider';
 
 const Signin = () => {
@@ -15,7 +15,7 @@ const Signin = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    let from = location.state?.from?.pathname || '/';
+    let from = location.state?.from?.pathname || '/profile';
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -30,13 +30,13 @@ const Signin = () => {
         setError('');
         try {
             await auth.signin({ email, password }, () => {
-                setTimeout(() => navigate(from, { replace: true }), 2000);
+                navigate(from, { replace: true });
             });
             setEmail('');
             setPassword('');
-            toast.success('Авторизация прошла успешно!', {
-                position: toast.POSITION.TOP_RIGHT
-            });
+            /*             toast.success('Авторизация прошла успешно!', {
+                            position: toast.POSITION.TOP_RIGHT
+                        }); */
         } catch (error) {
             setError(error);
             console.error(error);
@@ -48,7 +48,7 @@ const Signin = () => {
 
     return (
         <div>
-            <h2>Вход</h2>
+            <h1>Вход</h1>
             <ToastContainer />
             <form onSubmit={onSubmit}>
                 <TextField
@@ -67,9 +67,11 @@ const Signin = () => {
                     value={password}
                     required
                 />
-                {error && <p>{error}</p>}
+                {error && <p>{error.message}</p>}
                 <Btn buttonLabel='Войти'></Btn>
             </form>
+            <br />
+            <Link to={"/signup"}>Зарегистрироваться</Link>
         </div>
     )
 };
