@@ -18,4 +18,13 @@ export const initialChats = {
             { text: 'Message 1', author: AUTHORS.NONAME }
         ]
     }
-}
+};
+
+export const apiUrl = "https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=20";
+
+export const STATUSES = {
+    IDLE: 0,
+    REQUEST: 1,
+    SUCCESS: 2,
+    FAILURE: 3,
+};

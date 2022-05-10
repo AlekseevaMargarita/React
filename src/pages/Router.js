@@ -7,6 +7,7 @@ import Chats from '../pages/Chats';
 import '../App.scss';
 import NoMatch from './NoMatch';
 import Messages from '../components/Messages';
+import Facts from './Facts';
 
 
 const Router = () => (
@@ -22,6 +23,9 @@ const Router = () => (
                 <li>
                     <Link to="/chats">Chats</Link >
                 </li>
+                <li>
+                    <Link to="/facts">Daily cat facts!</Link >
+                </li>
             </ul>
         </header>
         <Routes>
@@ -30,6 +34,7 @@ const Router = () => (
             <Route path="chats" element={<Chats />}>
                 <Route path=":chatId" element={<Messages />} />
             </Route>
+            <Route path="facts" element={<Facts />} />
             <Route path="*" element={<NoMatch />} />
         </Routes>
 

@@ -20,8 +20,17 @@
     }
 }
 
+body {
+    padding: 0 calc(20px - (100vw - 100%)) 0 0;
+}
+
 .chats {
     width: 40%;
+    overflow-x: auto;
+}
+
+.facts {
+    width: 100%;
 }
 
 .Form {
@@ -67,6 +76,8 @@ h1 {
 .wrap {
     display: flex;
     justify-content: flex-start;
+    width: 100%;
+    height: calc(100vh - 180px);
 
     &__messages {
         width: 60%;
@@ -74,5 +85,8 @@ h1 {
         flex-direction: column;
         align-items: baseline;
         padding: 0 20px;
+        overflow-x: auto;
+
+
     }
 }
