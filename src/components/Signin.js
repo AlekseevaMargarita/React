@@ -30,10 +30,10 @@ const Signin = () => {
         setError('');
         try {
             await auth.signin({ email, password }, () => {
-                navigate(from, { replace: true });
+                setTimeout(navigate(from, { replace: true }), 0);
             });
-            setEmail('');
-            setPassword('');
+            /*             setEmail('');
+                        setPassword(''); */
             /*             toast.success('Авторизация прошла успешно!', {
                             position: toast.POSITION.TOP_RIGHT
                         }); */

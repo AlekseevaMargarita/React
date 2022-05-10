@@ -64,14 +64,14 @@ export const initUserData = () => async (dispatch) => {
             userName = userEmail;
             dispatch(setNameInDB(userName));
         }
-        dispatch(setName(uid, userName));
+        dispatch(setName(userName));
     });
     onValue(userShowNameRef, (snapshot) => {
         let userShowName = snapshot.val();
         if (userShowName === null) {
-            dispatch(setShowNameInDB(true));
+            dispatch(setShowNameInDB(false));
         }
-        dispatch(toggleName(uid, userShowName));
+        dispatch(toggleName(userShowName));
     });
 };
 

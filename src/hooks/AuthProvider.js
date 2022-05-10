@@ -19,8 +19,9 @@ export function AuthProvider({ children }) {
         callback();
     };
 
-    let signout = async () => {
+    let signout = async (callback) => {
         await signOut(auth);
+        callback();
         setUser(null);
     };
 

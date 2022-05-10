@@ -62,7 +62,7 @@ const Signup = () => {
                     value={password}
                     required
                 />
-                {error && <p>{error}</p>}
+                {error && <p>{error.message}</p>}
                 <Btn buttonLabel='Зарегистрироваться'></Btn>
             </form>
             <br />

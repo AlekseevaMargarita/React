@@ -6,6 +6,7 @@ import { selectShowName, selectUserName } from '../store/profile/selectors';
 import { Button } from '@mui/material';
 import useAuth from '../hooks/AuthProvider';
 import { initUserData, setNameInDB, setShowNameInDB } from '../middlewares/middleware';
+import { setName, toggleName } from '../store/profile/action';
 
 const Profile = () => {
     const showName = useSelector(selectShowName, shallowEqual);
@@ -39,7 +40,10 @@ const Profile = () => {
 
     const logOut = (e) => {
         e.preventDefault();
-        auth.signout();
+        auth.signout(() => {
+            dispatch(setName('NoName'));
+            dispatch(toggleName(false));
+        });
     }
 
     useEffect(() => {

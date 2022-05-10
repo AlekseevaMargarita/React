@@ -3,18 +3,16 @@
 export const TOGGLE_NAME = 'TOGGLE_NAME';
 export const SET_NAME = 'SET_NAME';
 
-export const toggleName = (id, value) => ({
+export const toggleName = (value) => ({
     type: TOGGLE_NAME,
     payload: {
-        id,
         value,
     },
 });
 
-export const setName = (id, name) => ({
+export const setName = (name) => ({
     type: SET_NAME,
     payload: {
-        id,
         name,
     },
 });
