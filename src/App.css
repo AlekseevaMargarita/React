@@ -1,0 +1,108 @@
+.App {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.App__header ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  list-style-type: none;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.App__header ul li {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+body {
+  padding: 0 calc(20px - (100vw - 100%)) 0 0;
+}
+
+.chats {
+  width: 40%;
+  overflow-x: auto;
+}
+
+.facts {
+  width: 100%;
+}
+
+.Form {
+  padding-top: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.Message {
+  max-width: 500px;
+  min-width: 200px;
+  text-align: left;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.Message-green {
+  background-color: #eff3f3;
+}
+
+.Message-blue {
+  background-color: azure;
+}
+
+.Message__author {
+  font-size: small;
+  font-weight: bold;
+}
+
+.Message__text {
+  word-wrap: break-word;
+}
+
+.name-wrap {
+  height: 60px;
+}
+
+.wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  height: calc(100vh - 180px);
+}
+
+.wrap__messages {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  padding: 0 20px;
+  overflow-x: auto;
+}
+/*# sourceMappingURL=App.css.map */

@@ -2,7 +2,7 @@
 import { STATUSES } from "../../constants/constants";
 import { GET_FACTS_FAILURE, GET_FACTS_REQUEST, GET_FACTS_SUCCESS } from "./action";
 
-const initialState = {
+export const initialState = {
     facts: [],
     request: STATUSES.IDLE,
     error: null,
@@ -18,7 +18,6 @@ export const factsReducer = (state = initialState, action) => {
                 request: STATUSES.REQUEST,
                 error: null,
                 loading: true,
-
             };
         case GET_FACTS_SUCCESS:
             return {
