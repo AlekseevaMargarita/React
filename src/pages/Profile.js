@@ -1,23 +1,29 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Btn from '../components/Btn';
-import { setName, toggleName } from '../store/profile/action';
 import { selectShowName, selectUserName } from '../store/profile/selectors';
+import { Button } from '@mui/material';
+import useAuth from '../hooks/AuthProvider';
+import { initUserData, setNameInDB, setShowNameInDB } from '../middlewares/middleware';
+import { setName, toggleName } from '../store/profile/action';
 
 const Profile = () => {
     const showName = useSelector(selectShowName, shallowEqual);
     const name = useSelector(selectUserName, shallowEqual);
-
+    const auth = useAuth();
     const dispatch = useDispatch();
 
-    const setShowName = useCallback(() => {
-        dispatch(toggleName);
-    }, [dispatch]);
-
     const [value, setValue] = useState('');
-
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        dispatch(initUserData());
+    }, []);
+
+    const setShowName = (e) => {
+        dispatch(setShowNameInDB(e.target.checked));
+    };
 
     const handleInput = (e) => {
         setValue(e.target.value);
@@ -26,11 +32,19 @@ const Profile = () => {
     const handleClick = (e) => {
         e.preventDefault();
         if (value !== '') {
-            dispatch(setName(value));
+            dispatch(setNameInDB(value));
             setValue('');
             inputRef.current?.focus();
         }
     };
+
+    const logOut = (e) => {
+        e.preventDefault();
+        auth.signout(() => {
+            dispatch(setName('NoName'));
+            dispatch(toggleName(false));
+        });
+    }
 
     useEffect(() => {
         inputRef.current?.focus;
@@ -68,6 +82,10 @@ const Profile = () => {
                     <Btn buttonLabel="Отправить" />
                 </div>
             </form>
+            <br />
+            <div>
+                <Button type="submit" onClick={logOut}>Выход</Button>
+            </div>
         </>
     );
 };

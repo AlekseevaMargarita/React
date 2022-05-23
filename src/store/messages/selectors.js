@@ -1,2 +1,2 @@
 export const selectMessagesByChatId = (chatId) => (state) =>
-    state.messages[chatId];
+    state.messages.messages[chatId];

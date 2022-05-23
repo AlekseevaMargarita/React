@@ -12,10 +12,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import FormDialog from "./FormDialog";
 import { selectChats } from "../store/chats/selectors";
-import { deleteChat } from "../store/chats/action";
+import { deleteChatWithFB, initMessagesTrackerWithFB, initTrackerWithFB } from "../middlewares/middleware";
+
 
 const ChatList = () => {
-    const chats = useSelector(selectChats, shallowEqual);
+    const { chats } = useSelector(selectChats, shallowEqual);
     const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -29,29 +30,36 @@ const ChatList = () => {
     const onDeleteChat = (event, chatId) => {
         event.preventDefault();
         event.stopPropagation();
-        dispatch(deleteChat(chatId));
+        dispatch(deleteChatWithFB(chatId));
     };
+
+    React.useEffect(() => {
+        dispatch(initTrackerWithFB());
+        dispatch(initMessagesTrackerWithFB());
+    }, []);
 
     return (
         <div className="chats">
             <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <List component="nav" aria-label="chatList">
-                    {Object.keys(chats).map((chat, index) => (
-                        <Link to={`/chats/${chats[chat].chatId}`} key={index}>
-                            <ListItemButton
-                                selected={selectedIndex === index}
-                                onClick={(event) => handleListItemClick(event, index)}>
-                                <ListItemAvatar>
-                                    <Avatar />
-                                </ListItemAvatar>
-                                <ListItemText primary={chats[chat].chatName} />
-                                <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </ListItemButton>
-                        </Link>
-                    ))}
-                </List>
+                {
+                    chats && <List component="nav" aria-label="chatList">
+                        {Object.keys(chats).map((chat, index) => (
+                            <Link to={`/chats/${chats[chat].chatId}`} key={index}>
+                                <ListItemButton
+                                    selected={selectedIndex === index}
+                                    onClick={(event) => handleListItemClick(event, index)}>
+                                    <ListItemAvatar>
+                                        <Avatar />
+                                    </ListItemAvatar>
+                                    <ListItemText primary={chats[chat].name} />
+                                    <IconButton onClick={(event) => onDeleteChat(event, chats[chat].chatId)} edge="end" aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItemButton>
+                            </Link>
+                        ))}
+                    </List>
+                }
             </Box>
             <FormDialog />
         </div>

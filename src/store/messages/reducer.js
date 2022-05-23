@@ -1,28 +1,16 @@
-import { ADD_CHAT, DELETE_CHAT } from "../chats/action";
-import { ADD_MESSAGE } from "./action";
+import { UPDATE_MESSAGES } from "./action";
 
-const initialState = {};
+const initialState = {
+    messages: {},
+};
 
 export const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_MESSAGE: {
-            const currentList = state[action.payload.chatId] || [];
+        case UPDATE_MESSAGES:
             return {
                 ...state,
-                [action.payload.chatId]: [
-                    ...currentList,
-                    action.payload.message,
-                ]
+                messages: action.payload.messages,
             };
-        }
-        case ADD_CHAT:
-            return {
-                ...state,
-                [action.payload.chat.chatId]: [],
-            }
-        case DELETE_CHAT: {
-            return delete state[action.payload.chatId];
-        }
         default:
             return state;
     }
