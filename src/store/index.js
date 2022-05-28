@@ -1,7 +1,6 @@
 
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
-import persistReducer from "redux-persist/es/persistReducer";
-import persistStore from "redux-persist/es/persistStore";
+import { persistStore, persistReducer } from 'redux-persist'
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
